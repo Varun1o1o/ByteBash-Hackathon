@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    #play-pause-button {
+      display: block;
+      width: 50px;
+      height: 50px;
+      background-color: #007bff;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    #play-pause-button.playing {
+      background-color: #ff0000;
+    }
+  </style>
+</head>
+<body>
+  <div id="play-pause-button">
+    <svg width="35" height="35" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="17.5" cy="17.5" r="17" fill="#fff" id="play-icon" />
+      <rect width="10" height="25" x="13" y="5" fill="#007bff" id="pause-icon" style="display: none" />
+    </svg>
+  </div>
+
+  <audio id="audio-player">
+    <source src="Naa-Ready-MassTamilan.dev.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    const playPauseButton = document.getElementById("play-pause-button");
+    const audioPlayer = document.getElementById("audio-player");
+    const playIcon = document.getElementById("play-icon");
+    const pauseIcon = document.getElementById("pause-icon");
+
+    let isPlaying = false;
+
+    playPauseButton.addEventListener("click", function () {
+      if (isPlaying) {
+        audioPlayer.pause();
+      } else {
+        audioPlayer.play();
+      }
+      isPlaying = !isPlaying;
+      updatePlayPauseIcon();
+    });
+
+    function updatePlayPauseIcon() {
+      if (isPlaying) {
+        playPauseButton.classList.add("playing");
+        playIcon.style.display = "none";
+        pauseIcon.style.display = "block";
+      } else {
+        playPauseButton.classList.remove("playing");
+        playIcon.style.display = "block";
+        pauseIcon.style.display = "none";
+      }
+    }
+  </script>
+</body>
+</html>
